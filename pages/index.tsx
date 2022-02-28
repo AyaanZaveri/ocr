@@ -5,10 +5,11 @@ export default function App() {
   const [text, setText] = useState<string>('')
   const [url, setUrl] = useState<string>('')
   const [image, setImage] = useState<string>('')
-  const [progress, setProgress] = useState<string>('')
+  const [progress, setProgress] = useState<number>(0)
 
   const worker = createWorker({
-    logger: (logs) => setProgress(logs.status == "recognizing text" ? logs.progress*100 + '%' : ''),
+    logger: (logs) =>
+      setProgress(logs.status == 'recognizing text' ? logs.progress * 100 : 0),
   })
 
   const getOCRData = async (img: string) => {
@@ -31,7 +32,7 @@ export default function App() {
   // https://tesseract.projectnaptha.com/img/eng_bw.png
 
   return (
-    <div className="mt-3 grid place-items-center">
+    <div className="mt-3 grid place-items-center gap-2">
       <div className="flex w-full justify-center gap-3">
         <input
           type="text"
@@ -41,16 +42,19 @@ export default function App() {
         />
         <button onClick={() => getOCRData(url)}>Run OCR</button>
       </div>
-      {image ? (
+      {/* {image ? (
         <img src={image} alt="" className="w-96" onError={() => setImage('')} />
+      ) : null} */}
+      {progress ? (
+        <div className="mt-3 h-2.5 w-3/12 rounded-full bg-gray-200 dark:bg-gray-700">
+          <div
+            className="h-2.5 rounded-full bg-blue-600 transition-all duration-500 ease-linear"
+            style={{ width: progress + '%' }}
+          ></div>
+          <span>{progress}%</span>
+        </div>
       ) : null}
-      <div className="h-2.5 w-3/12 mt-3 rounded-full bg-gray-200 dark:bg-gray-700">
-        <div
-          className="h-2.5 rounded-full bg-blue-600"
-          style={{ width: progress }}
-        ></div>
-      </div>
-      <h3>{text}</h3>
+      <h3 className='mt-5 w-9/12'>{text}</h3>
     </div>
   )
 }
