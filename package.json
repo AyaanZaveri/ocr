@@ -8,7 +8,9 @@
   "dependencies": {
     "next": "latest",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "tesseract.js": "^2.0.0",
+    "xmlhttprequest-ssl": "^2.0.0"
   },
   "devDependencies": {
     "@types/node": "17.0.4",
