@@ -5,9 +5,10 @@ export default function App() {
   const [text, setText] = useState<string>('')
   const [url, setUrl] = useState<string>('')
   const [image, setImage] = useState<string>('')
+  const [progress, setProgress] = useState<string>('')
 
   const worker = createWorker({
-    logger: (m) => console.log(m),
+    logger: (logs) => setProgress(logs.status == "recognizing text" ? logs.progress*100 + '%' : ''),
   })
 
   const getOCRData = async (img: string) => {
@@ -21,7 +22,6 @@ export default function App() {
       console.log(text)
       setText(text)
       await worker.terminate()
-
       setImage(url)
     } catch (error) {
       console.log(error, 'Invalid Image')
@@ -44,6 +44,12 @@ export default function App() {
       {image ? (
         <img src={image} alt="" className="w-96" onError={() => setImage('')} />
       ) : null}
+      <div className="h-2.5 w-3/12 mt-3 rounded-full bg-gray-200 dark:bg-gray-700">
+        <div
+          className="h-2.5 rounded-full bg-blue-600"
+          style={{ width: progress }}
+        ></div>
+      </div>
       <h3>{text}</h3>
     </div>
   )
