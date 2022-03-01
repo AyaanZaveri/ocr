@@ -31,30 +31,54 @@ export default function App() {
 
   // https://tesseract.projectnaptha.com/img/eng_bw.png
 
+  const checkProgress = () => {
+    if (progress <= 10) {
+      return 'Just Started...'
+    } else if (progress <= 80) {
+      return 'Almost there...'
+    } else if (progress <= 90) {
+      return 'So close...'
+    } else if (progress == 100) {
+      return 'Done!'
+    } else {
+      return 'Processing...'
+    }
+  }
+
   return (
     <div className="mt-3 grid place-items-center gap-2">
-      <div className="flex w-full justify-center gap-3">
-        <input
-          type="text"
-          className="w-3/12 rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200 active:bg-blue-100"
-          onChange={(e) => setUrl(e.target.value)}
-          placeholder="URL"
-        />
-        <button onClick={() => getOCRData(url)}>Run OCR</button>
+      <div className="flex w-4/12 flex-col justify-center gap-3">
+        <div className="flex flex-row gap-2">
+          <input
+            type="text"
+            className="w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200 active:bg-blue-100"
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder="URL"
+          />
+          <button
+            className="w-28 rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200 active:bg-blue-100"
+            onClick={() => getOCRData(url)}
+          >
+            Run OCR
+          </button>
+        </div>
+        {progress ? (
+          <div>
+            <span>{checkProgress()}</span>
+            <div className="mt-1 h-2.5 rounded-full bg-gray-200 dark:bg-gray-700">
+              <div
+                className="h-2.5 rounded-full bg-gradient-to-br from-blue-600 to-blue-500 transition-all duration-500 ease-linear"
+                style={{ width: progress + '%' }}
+              ></div>
+              <span className='text-sm text-gray-500'>{progress.toFixed(0)}%</span>
+            </div>
+          </div>
+        ) : null}
       </div>
       {/* {image ? (
         <img src={image} alt="" className="w-96" onError={() => setImage('')} />
       ) : null} */}
-      {progress ? (
-        <div className="mt-3 h-2.5 w-3/12 rounded-full bg-gray-200 dark:bg-gray-700">
-          <div
-            className="h-2.5 rounded-full bg-blue-600 transition-all duration-500 ease-linear"
-            style={{ width: progress + '%' }}
-          ></div>
-          <span>{progress}%</span>
-        </div>
-      ) : null}
-      <h3 className='mt-5 w-9/12'>{text}</h3>
+      <h3 className="mt-5 w-9/12">{text}</h3>
     </div>
   )
 }
