@@ -80,7 +80,7 @@ export default function App() {
               <span className="text-sm text-slate-500 drop-shadow-sm">
                 {progress.toFixed(0)}%
               </span>
-              <p className="mt-3 text-slate-800 w-full border h-auto p-2 rounded shadow-sm focus:ring-2 ring-offset-2 ring-emerald-400 outline-none transition-all" contentEditable="true">{text}</p>
+              <p className="mt-3 text-slate-800 w-full border h-auto p-2 rounded-lg shadow-sm focus:ring-2 ring-offset-2 ring-emerald-400 outline-none transition-all" contentEditable="true">{text}</p>
             </div>
           </div>
         ) : null}
