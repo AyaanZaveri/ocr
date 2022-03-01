@@ -48,13 +48,13 @@ export default function App() {
 
   return (
     <div className="mt-3 grid place-items-center gap-2">
-      <div className="flex w-4/12 flex-col justify-center gap-3">
+      <div className="flex w-6/12 flex-col justify-center gap-3">
         <div className="flex flex-row gap-2">
           <input
             type="text"
             className="w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200 active:bg-blue-100"
             onChange={(e) => setUrl(e.target.value)}
-            placeholder="URL"
+            placeholder="URL of an image"
           />
           <button
             className="w-3/12 rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200 active:bg-blue-100"
@@ -65,17 +65,22 @@ export default function App() {
         </div>
         {progress ? (
           <div>
-            <span className="font-medium drop-shadow-sm text-slate-800">
+            <span className="font-medium text-slate-800 drop-shadow-sm">
               {checkProgress()}
             </span>
             <div className="mt-1 h-2.5 rounded-full bg-slate-200 dark:bg-slate-700">
               <div
-                className={`h-2.5 rounded-full shadow bg-gradient-to-r ${progress !== 100 ? "from-blue-500 to-sky-500" : "from-green-500 to-emerald-500" } transition-all duration-500 ease-linear`}
+                className={`h-2.5 rounded-full bg-gradient-to-r shadow ${
+                  progress !== 100
+                    ? 'from-blue-500 to-sky-500'
+                    : 'from-green-500 to-emerald-500'
+                } transition-all duration-500 ease-linear`}
                 style={{ width: progress + '%' }}
               ></div>
               <span className="text-sm text-slate-500 drop-shadow-sm">
                 {progress.toFixed(0)}%
               </span>
+              <h3 className="mt-2 w-9/12">{text}</h3>
             </div>
           </div>
         ) : null}
@@ -83,7 +88,6 @@ export default function App() {
       {/* {image ? (
         <img src={image} alt="" className="w-96" onError={() => setImage('')} />
       ) : null} */}
-      <h3 className="mt-5 w-9/12">{text}</h3>
     </div>
   )
 }
