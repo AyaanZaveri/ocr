@@ -85,23 +85,24 @@ export default function App() {
           </div>
         ) : null}
         {progress == 100 ? (
-          <div className="mt-5 flex flex-row items-center gap-3 ">
+          <div className="mt-5 flex h-full w-full flex-row items-center gap-3 ">
             {image ? (
               <img
                 src={image}
                 alt=""
-                className="w-80 rounded-lg border p-2 shadow-sm"
+                className="h-40 rounded-md border p-2 shadow-sm"
                 onError={() => setImage('')}
               />
             ) : null}
-            <div className="inline-flex items-start gap-2">
-              <p
-                className="w-full rounded-lg border p-2 text-slate-800 shadow-sm outline-none transition-all focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2"
-                contentEditable="true"
+            <div className="inline-flex h-full w-full items-start gap-2">
+              <textarea
+                className="w-full h-40 rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-emerald-500 focus:outline-none focus:ring focus:ring-emerald-200 active:bg-emerald-100"
+                value={text}
               >
+              
                 {text}
-              </p>
-              <div className="rounded-md hover:cursor-pointer border border-slate-200 bg-white px-2 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-emerald-500 focus:outline-none focus:ring focus:ring-emerald-200 active:bg-emerald-100">
+              </textarea>
+              <div className="rounded-md border border-slate-200 bg-white px-2 py-2 text-slate-600 shadow-sm transition hover:cursor-pointer hover:bg-slate-50 focus:border-emerald-500 focus:outline-none focus:ring focus:ring-emerald-200 active:bg-emerald-100">
                 <ClipboardIcon
                   className="h-5 w-5 text-slate-500"
                   onClick={() => {
