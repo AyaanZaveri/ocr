@@ -7,6 +7,7 @@ export default function App() {
   const [url, setUrl] = useState<string>('')
   const [image, setImage] = useState<string>('')
   const [progress, setProgress] = useState<number>(0)
+  const [logs, setLogs] = useState<any>()
 
   const handleChange = (event: any) => {
     setImage(URL.createObjectURL(event.target.files[0]))
@@ -14,8 +15,9 @@ export default function App() {
   }
 
   const worker = createWorker({
-    logger: (logs) =>
-      setProgress(logs.status == 'recognizing text' ? logs.progress * 100 : 0),
+    logger: (logs) => {
+      setProgress(logs.status == 'recognizing text' ? logs.progress * 100 : 0)
+    }
   })
 
   const getOCRData = async (img: string) => {
@@ -24,10 +26,8 @@ export default function App() {
       await worker.load()
       await worker.loadLanguage('fra')
       await worker.initialize('fra')
-      const {
-        data: { text },
-      } = await worker.recognize(img)
-      console.log(text)
+      const data = await worker.recognize(img)
+      setLogs(data)
       setText(text)
       await worker.terminate()
       setImage(url)
@@ -74,6 +74,7 @@ export default function App() {
           >
             Run OCR
           </button>
+          {JSON.stringify(logs)}
         </div>
         {progress ? (
           <div>
@@ -108,9 +109,9 @@ export default function App() {
             <div className="inline-flex h-full w-full items-start gap-2">
               <textarea
                 className="h-40 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-emerald-500 focus:outline-none focus:ring focus:ring-emerald-200 active:bg-emerald-100"
-                value={text}
+                // value={text}
               >
-                {text}
+                
               </textarea>
               <button className="rounded-md border border-slate-200 bg-white px-2 py-2 text-slate-600 shadow-sm transition hover:cursor-pointer hover:bg-slate-50 focus:border-emerald-500 focus:outline-none focus:ring focus:ring-emerald-200 active:bg-emerald-100">
                 <ClipboardIcon
