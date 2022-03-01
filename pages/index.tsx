@@ -8,6 +8,11 @@ export default function App() {
   const [image, setImage] = useState<string>('')
   const [progress, setProgress] = useState<number>(0)
 
+  const handleChange = (event: any) => {
+    setImage(URL.createObjectURL(event.target.files[0]))
+    setUrl(URL.createObjectURL(event.target.files[0]))
+  }
+
   const worker = createWorker({
     logger: (logs) =>
       setProgress(logs.status == 'recognizing text' ? logs.progress * 100 : 0),
@@ -17,8 +22,8 @@ export default function App() {
     setText('')
     try {
       await worker.load()
-      await worker.loadLanguage('eng')
-      await worker.initialize('eng')
+      await worker.loadLanguage('fra')
+      await worker.initialize('fra')
       const {
         data: { text },
       } = await worker.recognize(img)
@@ -53,12 +58,17 @@ export default function App() {
     <div className="mt-3 grid place-items-center gap-2">
       <div className="flex w-7/12 flex-col justify-center gap-3">
         <div className="flex flex-row gap-2">
+        <input
+            type="file"
+            onChange={handleChange}
+          />
           <input
             type="text"
             className="w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-emerald-500 focus:outline-none focus:ring focus:ring-emerald-200 active:bg-emerald-100"
             onChange={(e) => setUrl(e.target.value)}
             placeholder="URL of an image"
           />
+          {image}
           <button
             className="w-2/12 rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-emerald-500 focus:outline-none focus:ring focus:ring-emerald-200 active:bg-emerald-100"
             onClick={() => getOCRData(url)}
@@ -87,12 +97,12 @@ export default function App() {
           </div>
         ) : null}
         {progress == 100 ? (
-          <div className="mt-5 flex h-full w-full flex-row items-center gap-3 ">
+          <div className="mt-5 flex flex-wrap h-full w-full flex-row items-center gap-3 ">
             {image ? (
               <img
                 src={image}
                 alt=""
-                className="h-40 rounded-md border p-2 shadow-sm"
+                className="rounded-md border p-2 shadow-sm"
                 onError={() => setImage('')}
               />
             ) : null}
