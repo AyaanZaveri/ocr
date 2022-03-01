@@ -57,7 +57,7 @@ export default function App() {
   return (
     <div className="mt-3 grid place-items-center gap-2">
       <div className="flex w-7/12 flex-col justify-center gap-3">
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-row items-center gap-2">
         <input
             type="file"
             onChange={handleChange}
@@ -101,7 +101,7 @@ export default function App() {
               <img
                 src={image}
                 alt=""
-                className="rounded-md border p-2 shadow-sm"
+                className="rounded-md border p-2 shadow-sm max-h-52"
                 onError={() => setImage('')}
               />
             ) : null}
