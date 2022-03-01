@@ -34,7 +34,9 @@ export default function App() {
   // https://tesseract.projectnaptha.com/img/eng_bw.png
 
   const checkProgress = () => {
-    if (progress <= 10) {
+    if (progress == 0) {
+      return 'Starting...'
+    } else if (progress <= 10) {
       return 'Just Started...'
     } else if (progress <= 80) {
       return 'Almost there...'
@@ -96,10 +98,9 @@ export default function App() {
             ) : null}
             <div className="inline-flex h-full w-full items-start gap-2">
               <textarea
-                className="w-full h-40 rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-emerald-500 focus:outline-none focus:ring focus:ring-emerald-200 active:bg-emerald-100"
+                className="h-40 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-emerald-500 focus:outline-none focus:ring focus:ring-emerald-200 active:bg-emerald-100"
                 value={text}
               >
-              
                 {text}
               </textarea>
               <button className="rounded-md border border-slate-200 bg-white px-2 py-2 text-slate-600 shadow-sm transition hover:cursor-pointer hover:bg-slate-50 focus:border-emerald-500 focus:outline-none focus:ring focus:ring-emerald-200 active:bg-emerald-100">
