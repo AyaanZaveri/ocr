@@ -52,12 +52,12 @@ export default function App() {
         <div className="flex flex-row gap-2">
           <input
             type="text"
-            className="w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200 active:bg-blue-100"
+            className="w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-emerald-500 focus:outline-none focus:ring focus:ring-emerald-200 active:bg-emerald-100"
             onChange={(e) => setUrl(e.target.value)}
             placeholder="URL of an image"
           />
           <button
-            className="w-3/12 rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200 active:bg-blue-100"
+            className="w-3/12 rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-emerald-500 focus:outline-none focus:ring focus:ring-emerald-200 active:bg-emerald-100"
             onClick={() => getOCRData(url)}
           >
             Run OCR
@@ -80,7 +80,7 @@ export default function App() {
               <span className="text-sm text-slate-500 drop-shadow-sm">
                 {progress.toFixed(0)}%
               </span>
-              <p className="mt-2 text-slate-800 w-full border h-auto p-2 rounded shadow-sm">{text}</p>
+              <p className="mt-3 text-slate-800 w-full border h-auto p-2 rounded shadow-sm focus:ring-2 ring-offset-2 ring-emerald-400 outline-none" contentEditable="true">{text}</p>
             </div>
           </div>
         ) : null}
