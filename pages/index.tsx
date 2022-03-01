@@ -80,14 +80,29 @@ export default function App() {
               <span className="text-sm text-slate-500 drop-shadow-sm">
                 {progress.toFixed(0)}%
               </span>
-              <p className="mt-3 text-slate-800 w-full border h-auto p-2 rounded-lg shadow-sm focus:ring-2 ring-offset-2 ring-emerald-400 outline-none transition-all" contentEditable="true">{text}</p>
             </div>
           </div>
         ) : null}
+        {progress == 100 ? (
+          <div className='mt-5 flex flex-row gap-3 items-center'>
+            {image ? (
+              <img
+                src={image}
+                alt=""
+                className="w-80 border rounded-lg shadow-sm p-2"
+                onError={() => setImage('')}
+              />
+            ) : null}
+            <p
+              className="mt-3 h-auto w-full rounded-lg border p-2 text-slate-800 shadow-sm outline-none transition-all focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2"
+              contentEditable="true"
+            >
+              {text}
+            </p>
+            <button onClick={() => {navigator.clipboard.writeText(text)}}>Copy</button>
+          </div>
+        ) : null}
       </div>
-      {/* {image ? (
-        <img src={image} alt="" className="w-96" onError={() => setImage('')} />
-      ) : null} */}
     </div>
   )
 }
