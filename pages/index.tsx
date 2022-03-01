@@ -68,7 +68,6 @@ export default function App() {
             onChange={(e) => setUrl(e.target.value)}
             placeholder="URL of an image"
           />
-          {image}
           <button
             className="w-2/12 rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-emerald-500 focus:outline-none focus:ring focus:ring-emerald-200 active:bg-emerald-100"
             onClick={() => getOCRData(url)}
