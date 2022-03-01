@@ -102,14 +102,14 @@ export default function App() {
               
                 {text}
               </textarea>
-              <div className="rounded-md border border-slate-200 bg-white px-2 py-2 text-slate-600 shadow-sm transition hover:cursor-pointer hover:bg-slate-50 focus:border-emerald-500 focus:outline-none focus:ring focus:ring-emerald-200 active:bg-emerald-100">
+              <button className="rounded-md border border-slate-200 bg-white px-2 py-2 text-slate-600 shadow-sm transition hover:cursor-pointer hover:bg-slate-50 focus:border-emerald-500 focus:outline-none focus:ring focus:ring-emerald-200 active:bg-emerald-100">
                 <ClipboardIcon
                   className="h-5 w-5 text-slate-500"
                   onClick={() => {
                     navigator.clipboard.writeText(text)
                   }}
                 />
-              </div>
+              </button>
             </div>
           </div>
         ) : null}
