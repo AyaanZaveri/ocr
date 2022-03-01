@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { createWorker } from 'tesseract.js'
+import { ClipboardIcon } from '@heroicons/react/outline'
 
 export default function App() {
   const [text, setText] = useState<string>('')
@@ -48,7 +49,7 @@ export default function App() {
 
   return (
     <div className="mt-3 grid place-items-center gap-2">
-      <div className="flex w-6/12 flex-col justify-center gap-3">
+      <div className="flex w-7/12 flex-col justify-center gap-3">
         <div className="flex flex-row gap-2">
           <input
             type="text"
@@ -57,7 +58,7 @@ export default function App() {
             placeholder="URL of an image"
           />
           <button
-            className="w-3/12 rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-emerald-500 focus:outline-none focus:ring focus:ring-emerald-200 active:bg-emerald-100"
+            className="w-2/12 rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-emerald-500 focus:outline-none focus:ring focus:ring-emerald-200 active:bg-emerald-100"
             onClick={() => getOCRData(url)}
           >
             Run OCR
@@ -84,22 +85,31 @@ export default function App() {
           </div>
         ) : null}
         {progress == 100 ? (
-          <div className='mt-5 flex flex-row gap-3 items-center'>
+          <div className="mt-5 flex flex-row items-center gap-3 ">
             {image ? (
               <img
                 src={image}
                 alt=""
-                className="w-80 border rounded-lg shadow-sm p-2"
+                className="w-80 rounded-lg border p-2 shadow-sm"
                 onError={() => setImage('')}
               />
             ) : null}
-            <p
-              className="mt-3 h-auto w-full rounded-lg border p-2 text-slate-800 shadow-sm outline-none transition-all focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2"
-              contentEditable="true"
-            >
-              {text}
-            </p>
-            <button onClick={() => {navigator.clipboard.writeText(text)}}>Copy</button>
+            <div className="inline-flex items-start gap-2">
+              <p
+                className="w-full rounded-lg border p-2 text-slate-800 shadow-sm outline-none transition-all focus:ring-2 focus:ring-emerald-400 focus:ring-offset-2"
+                contentEditable="true"
+              >
+                {text}
+              </p>
+              <div className="rounded-md hover:cursor-pointer border border-slate-200 bg-white px-2 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-emerald-500 focus:outline-none focus:ring focus:ring-emerald-200 active:bg-emerald-100">
+                <ClipboardIcon
+                  className="h-5 w-5 text-slate-500"
+                  onClick={() => {
+                    navigator.clipboard.writeText(text)
+                  }}
+                />
+              </div>
+            </div>
           </div>
         ) : null}
       </div>
