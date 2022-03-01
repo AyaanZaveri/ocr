@@ -13,6 +13,7 @@ export default function App() {
   })
 
   const getOCRData = async (img: string) => {
+    setText('')
     try {
       await worker.load()
       await worker.loadLanguage('eng')
@@ -56,7 +57,7 @@ export default function App() {
             placeholder="URL"
           />
           <button
-            className="w-28 rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200 active:bg-blue-100"
+            className="w-3/12 rounded-md border border-slate-200 bg-white px-3 py-2 text-slate-600 shadow-sm transition hover:bg-slate-50 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200 active:bg-blue-100"
             onClick={() => getOCRData(url)}
           >
             Run OCR
@@ -64,13 +65,17 @@ export default function App() {
         </div>
         {progress ? (
           <div>
-            <span>{checkProgress()}</span>
-            <div className="mt-1 h-2.5 rounded-full bg-gray-200 dark:bg-gray-700">
+            <span className="font-medium drop-shadow-sm text-slate-800">
+              {checkProgress()}
+            </span>
+            <div className="mt-1 h-2.5 rounded-full bg-slate-200 dark:bg-slate-700">
               <div
-                className="h-2.5 rounded-full bg-gradient-to-br from-blue-600 to-blue-500 transition-all duration-500 ease-linear"
+                className={`h-2.5 rounded-full shadow bg-gradient-to-r ${progress !== 100 ? "from-blue-500 to-sky-500" : "from-green-500 to-emerald-500" } transition-all duration-500 ease-linear`}
                 style={{ width: progress + '%' }}
               ></div>
-              <span className='text-sm text-gray-500'>{progress.toFixed(0)}%</span>
+              <span className="text-sm text-slate-500 drop-shadow-sm">
+                {progress.toFixed(0)}%
+              </span>
             </div>
           </div>
         ) : null}
